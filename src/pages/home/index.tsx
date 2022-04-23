@@ -1,9 +1,9 @@
 import IGContainer from 'components/IGContainer';
 import IGHeader from 'components/IGHeader';
-import IGUser from 'components/IGUser';
 
 import IGStory from './components/IGStory';
 import IGPost from './components/IGPost';
+import IGProfile from './components/IGProfile';
 
 import db from '../../db.json';
 
@@ -43,8 +43,7 @@ const Home: React.FC = () => {
             <IGPostList />
           </div>
           <div className='hidden lg:block lg:w-[424px]'>
-            right
-            <IGUser avatar='/images/avatars/a2.png' account='user1' location='taipei' showFollow isFollowing />
+            <IGProfile />
           </div>
         </div>
       </IGContainer>
