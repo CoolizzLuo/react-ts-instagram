@@ -4,30 +4,36 @@ import IGHeader from 'components/IGHeader';
 import IGStory from './components/IGStory';
 import IGPost from './components/IGPost';
 import IGProfile from './components/IGProfile';
+import Loading from 'components/Loading';
 
-import db from '../../db.json';
+import { useGetIGPostsQuery } from 'services/homeServices';
 
 const IGPostList: React.FC = () => {
-  const data = db.posts;
-
+  const { data, isLoading } = useGetIGPostsQuery('all');
   return (
     <>
-      {data?.map((item) => {
-        const { id, location, account, avatar, photo, likes, description, hashTags, createTime } = item;
-        return (
-          <IGPost
-            location={location}
-            account={account}
-            avatar={avatar}
-            photo={photo}
-            likes={likes}
-            description={description}
-            hashTags={hashTags}
-            createTime={createTime}
-            key={id}
-          />
-        );
-      })}
+      {isLoading && (
+        <div className='w-full flex justify-center mt-20'>
+          <Loading />
+        </div>
+      )}
+      {!isLoading &&
+        data?.map((item) => {
+          const { id, location, account, avatar, photo, likes, description, hashTags, createTime } = item;
+          return (
+            <IGPost
+              location={location}
+              account={account}
+              avatar={avatar}
+              photo={photo}
+              likes={likes}
+              description={description}
+              hashTags={hashTags}
+              createTime={createTime}
+              key={id}
+            />
+          );
+        })}
     </>
   );
 };
